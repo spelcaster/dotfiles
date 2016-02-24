@@ -1,14 +1,16 @@
 #!/bin/sh
 
-OLD_EMAIL=$1
-NEW_NAME=$2
-NEW_EMAIL=$3
-
-#OLD_EMAIL="my_email@example.com"
-#NEW_NAME="Shurelous"
-#NEW_EMAIL="shurelous@example.com"
+###############################################################################
+# THIS BLOCK SHOULD BE REMOVED
+echo "This script should not be used without providing new author information"
+return 0
+###############################################################################
 
 git filter-branch --env-filter '
+OLD_EMAIL="my_email@example.com"
+NEW_NAME="Shurelous"
+NEW_EMAIL="shurelous@example.com"
+
 if [ "$GIT_COMMITTER_EMAIL" = "$OLD_EMAIL" ]
 then
     export GIT_COMMITTER_NAME="$NEW_NAME"
