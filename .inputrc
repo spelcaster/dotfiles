@@ -1,0 +1,15 @@
+# for linux console
+"\e[1~": beginning-of-line
+"\e[4~": end-of-line
+
+# for urxvt
+"\e[7~": beginning-of-line
+"\e[8~": end-of-line
+
+# for xterm
+"\eOH": beginning-of-line
+"\eOF": end-of-line
+
+# for freebsd console
+"\e[H": beginning-of-line
+"\e[F": end-of-line
