@@ -4,13 +4,15 @@ URxvt*buffered:             true    ! double buffer for xtf
 URxvt*hold:                 false   ! kill window on shell exit
 URxvt*loginShell:           true    ! load shell profiles
 URxvt*print-pipe:           cat > $HOME/tmp/$(echo urxvt.dump.$(date + '%s'))
-URxvt*saveLines:            10000   ! non-tmux window scoll back
+URxvt*saveLines:            100000  ! non-tmux window scoll back
 URxvt*geometry:             120x40  ! window size
 URxvt*iso14755:             false
 URxvt*iso14755_52:          false
 
 ! Text
-URxvt*font:                 xft:Terminus:pixelsize=14:antialias=false,xft:Inconsolata\ for\ Powerline:pixelsize=14
+URxvt*font:                 xft:Terminus:pixelsize=14,\
+                            xft:Inconsolata\ for\ Powerline:pixelsize=12,\
+                            xft:Monospace:size=6:antialias=true:hinting=true
 URxvt*colorUL:              yellow
 URxvt*internalBorder:       6       ! pixels from frame edge
 URxvt*lineSpace:            4       ! pixels between lines for added readability
@@ -25,10 +27,10 @@ URxvt*transparent:          true
 URxvt*visualBell:           false
 
 ! Behavior
-URxvt*scrollTtyKeypress:    true    ! scroll to bottom on keypress
-URxvt*scrollTtyOutput:      false   ! do not scroll to bottom on output
-URxvt*scrollWithBuffer:     false   ! do not use scollback buffer
-URxvt*skipScroll:           true    ! favour scroll speed over listing all lines
+!URxvt*scrollTtyKeypress:    true    ! scroll to bottom on keypress
+!URxvt*scrollTtyOutput:      false   ! do not scroll to bottom on output
+!URxvt*scrollWithBuffer:     true    ! do not use scollback buffer
+!URxvt*skipScroll:           true    ! favour scroll speed over listing all lines
 
 ! Extensions
 URxvt.perl-lib:             .urxvt/

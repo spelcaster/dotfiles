@@ -20,3 +20,6 @@ antigen apply
 
 export TERM='xterm-256color'
 export PATH=$PATH:$HOME/.composer/vendor/bin
+
+~/bin/gruvbox_palette.sh
+~/bin/urxvt-meta.sh
