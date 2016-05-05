@@ -18,6 +18,8 @@ antigen theme ys
 # Tell antigen that you're done.
 antigen apply
 
+alias exit='sh ~/bin/see_you_space_cowboy.sh; sleep 2; exit'
+
 export TERM='xterm-256color'
 export PATH=$PATH:$HOME/.composer/vendor/bin
 
