@@ -8,6 +8,8 @@ URxvt*saveLines:            10000   ! non-tmux window scroll back
 URxvt*geometry:             120x40  ! window size
 URxvt*iso14755:             false
 URxvt*iso14755_52:          false
+URxvt*meta8:                true
+URxvt*modifier:             meta
 
 ! Text
 URxvt*font:                 xft:Terminus:pixelsize=14,\
@@ -32,28 +34,7 @@ URxvt*visualBell:           false
 !URxvt*scrollWithBuffer:     false   ! do not use scrollback buffer
 !URxvt*skipScroll:           true    ! favour scroll speed over listing all lines
 
-! Extensions
-URxvt.perl-lib:             .urxvt/
-URxvt.perl-ext-common:      default,clipboard,url-select,keyboard-select,autocomplete-ALL-the-things,tabbedex
-URxvt.url-launcher:         /usr/bin/firefox
-URxvt.matcher.button:       1
-URxvt.url-select.underline: true
-URxvt.clipboard.copycmd:    xsel -ib
-URxvt.clipboard.pastecmd:   xsel -ob
-URxvt.tabbed.new-button: true
-URXvt.tabbed.reopen-on-close: yes
-!URxvt.keysym.Control-Shift-t: perl:tabbedex:new_tab
-!URxvt.keysym.Shifft-Right: perl:tabbedex:next_tab
-!URxvt.keysym.Shift-Left: perl:tabbedex:prev_tab
-!URxvt.tabbed.no-tabbedex-keys: true
-
 ! Keymaps
-URxvt.keysym.M-u:           perl:url-select:select_next
-URxvt.keysym.M-Escape:      perl:keyboard-select:activate
-URxvt.keysym.M-s:           perl:keyboard-select:search
-URxvt.keysym.M-slash:       perl:aAtt:complete
-URxvt.keysym.Shift-Control-C: perl:clipboard:copy
-URxvt.keysym.Shift-Control-V: perl:clipboard:paste
 
 URxvt.keysym.F1               : \033OP
 URxvt.keysym.F2               : \033OQ
@@ -69,10 +50,10 @@ URxvt.keysym.F4               : \033OS
 !URxvt.keysym.Page_Down       : \033[6~ !breaks scrolling in Rxvt
 !URxvt.keysym.Home            : \033[H  !breaks navigation in Vim
 !URxvt.keysym.End             : \033[F  !breaks navigation in Vim
-URxvt.keysym.S-Up             : \033[1;2A
-URxvt.keysym.S-Down           : \033[1;2B
-URxvt.keysym.S-Right          : \033[1;2C
-URxvt.keysym.S-Left           : \033[1;2D
+!URxvt.keysym.S-Up             : \033[1;2A
+!URxvt.keysym.S-Down           : \033[1;2B
+!URxvt.keysym.S-Right          : \033[1;2C
+!URxvt.keysym.S-Left           : \033[1;2D
 !URxvt.keysym.S-Page_Up       : captured by terminal for scrolling
 !URxvt.keysym.S-Page_Down     : captured by terminal for scrolling
 URxvt.keysym.S-Home           : \033[1;2H
@@ -103,8 +84,8 @@ URxvt.keysym.C-Home           : \033[1;5H
 URxvt.keysym.C-End            : \033[1;5F
 URxvt.keysym.C-S-Up           : \033[1;6A
 URxvt.keysym.C-S-Down         : \033[1;6B
-URxvt.keysym.C-S-Right        : \033[1;6C
-URxvt.keysym.C-S-Left         : \033[1;6D
+!URxvt.keysym.C-S-Right        : \033[1;6C
+!URxvt.keysym.C-S-Left         : \033[1;6D
 !URxvt.keysym.C-S-Page_Up     : seen as Rxvt.keysym.S-Page_Up
 !URxvt.keysym.C-S-Page_Down   : seen as Rxvt.keysym.S-Page_Down
 URxvt.keysym.C-S-Home         : \033[1;6H
@@ -125,3 +106,40 @@ URxvt.keysym.M-C-S-Left       : \033[1;8D
 !URxvt.keysym.M-C-S-Page_Down : seen as Rxvt.keysym.S-Page_Down
 URxvt.keysym.M-C-S-Home       : \033[1;8H
 URxvt.keysym.M-C-S-End        : \033[1;8F
+
+! Extensions
+URxvt.perl-lib                : .urxvt
+URxvt.perl-ext-common         : default,tabbedex,clipboard,url-select,keyboard-select,autocomplete-ALL-the-things
+
+! autocomplete-ALL-the-things
+URxvt.keysym.M-C-slash        : perl:aAtt:word-complete
+URxvt.keysym.M-question       : perl:aAtt:fuzzy-complete
+URxvt.keysym.M-quotedbl       : perl:aAtt:undo
+
+! keyboard-select
+URxvt.keysym.M-x              : perl:keyboard-select:activate
+URxvt.keysym.M-s              : perl:keyboard-select:search
+
+! url-select
+URxvt.matcher.button          : 1
+URxvt.url-launcher.launcher   : /usr/bin/firefox
+URxvt.url-select.autocopy     : true
+URxvt.url-select.underline    : true
+URxvt.keysym.M-u              : perl:url-select:select_next
+
+! clipboard
+URxvt.clipboard.copycmd       : xsel -ib
+URxvt.clipboard.pastecmd      : xsel -ob
+URxvt.keysym.C-S-C            : perl:clipboard:copy
+URxvt.keysym.C-S-V            : perl:clipboard:paste
+URxvt.keysym.M-C-V            : perl:clipboard:paste_escaped
+
+! tabbedex
+URXvt.tabbed.reopen-on-close  : yes
+URxvt.tabbed.no-tabbedex-keys : true
+URxvt.keysym.C-S-Right        : perl:tabbedex:move_tab_right
+URxvt.keysym.C-S-Left         : perl:tabbedex:move_tab_left
+URxvt.keysym.C-S-T            : perl:tabbedex:new_tab
+URxvt.keysym.S-Down           : perl:tabbedex:rename_tab
+URxvt.keysym.S-Right          : perl:tabbedex:next_tab
+URxvt.keysym.S-Left           : perl:tabbedex:prev_tab
