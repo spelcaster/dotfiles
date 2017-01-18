@@ -1,0 +1,23 @@
+[user]
+	email = username@example.com
+	name = Username
+[core]
+	editor = vim
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	interactive = auto
+	ui = always
+	pager = true
+[color "status"]
+	added = green
+	changed = red bold
+	untracked = magenta bold
+[color "branch"]
+	remote = yellow
+[status]
+	submoduleSummary = true
+[alias]
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	graph = log --graph --decorate --oneline
