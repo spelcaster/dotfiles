@@ -1,24 +1,22 @@
 ! Settings
-URxvt*termName:             rxvt-unicode-256color
+URxvt*termName:             screen-256color
 URxvt*buffered:             true    ! double buffer for xtf
 URxvt*hold:                 false   ! kill window on shell exit
 URxvt*loginShell:           true    ! load shell profiles
 URxvt*print-pipe:           cat > $HOME/tmp/$(echo urxvt.dump.$(date + '%s'))
 URxvt*saveLines:            10000   ! non-tmux window scroll back
-URxvt*geometry:             120x40  ! window size
+URxvt*geometry:             240x84  ! window size
 URxvt*iso14755:             false
 URxvt*iso14755_52:          false
-URxvt*meta8:                true
-URxvt*modifier:             meta
 
 ! Text
-URxvt*font:                 xft:Terminus:pixelsize=14,\
-                            xft:Inconsolata\ for\ Powerline:pixelsize=12,\
-                            xft:Monospace:size=6:antialias=true:hinting=true
+URxvt*font:                 -xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-15,xft:terminus:pixelsize:12
+URxvt*boldFont:             -xos4-terminus-bold-*-*-*-14-*-*-*-*-*-iso8859-15,xft:terminus:bold:pixelsize:12
+URxvt*italicFont:           xft:Bitstream Vera Sans Mono:italic:autohint=true:pixelsize=12
+URxvt*boldItalicFont:       xft:Bitstream Vera Sans Mono:bold:italic:autohint=true:pixelsize=12
 URxvt*colorUL:              yellow
+URxvt*underlineColor:       yellow
 URxvt*internalBorder:       6       ! pixels from frame edge
-URxvt*lineSpace:            4       ! pixels between lines for added readability
-URxvt*undelineColor:        yellow
 
 ! UI
 URxvt*fading:               30      ! % brightness reduction on focus loss
