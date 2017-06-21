@@ -1,5 +1,5 @@
 ! Settings
-URxvt*termName:             screen-256color
+URxvt*termName:             rxvt-unicode-256color
 URxvt*buffered:             true    ! double buffer for xtf
 URxvt*hold:                 false   ! kill window on shell exit
 URxvt*loginShell:           true    ! load shell profiles
@@ -10,13 +10,22 @@ URxvt*iso14755:             false
 URxvt*iso14755_52:          false
 
 ! Text
-URxvt*font:                 -xos4-terminus-medium-*-*-*-14-*-*-*-*-*-iso8859-15,xft:terminus:pixelsize:12
-URxvt*boldFont:             -xos4-terminus-bold-*-*-*-14-*-*-*-*-*-iso8859-15,xft:terminus:bold:pixelsize:12
-URxvt*italicFont:           xft:Bitstream Vera Sans Mono:italic:autohint=true:pixelsize=12
-URxvt*boldItalicFont:       xft:Bitstream Vera Sans Mono:bold:italic:autohint=true:pixelsize=12
 URxvt*colorUL:              yellow
 URxvt*underlineColor:       yellow
 URxvt*internalBorder:       6       ! pixels from frame edge
+
+! Fonts -> use fc-list to search the font family name
+! Terminess
+URxvt*font:                 xft:xos4\ Terminess\ Powerline:pixelsize=14:antialias=true:hinting=true,xft:xos4\ Terminess\ Powerline:pixelsize=14:antialias=true:hinting=true
+URxvt*boldFont:             xft:xos4\ Terminess\ Powerline:bold:pixelsize=14:antialias=true:hinting=true
+URxvt*italicFont:           xft:xos4\ Terminess\ Powerline:italic:pixelsize=14:antialias=true:hinting=true
+URxvt*boldItalicFont:       xft:xos4\ Terminess\ Powerline:bold:italic:pixelsize=14:antialias=true:hinting=true
+
+! Source Code Pro
+!URxvt*font:                 xft:Source\ Code\ Pro\ Medium:pixelsize=14:antialias=true:hinting=true,xft:Source\ Code\ Pro\ Medium:pixelsize=14:antialias=true:hinting=true
+!URxvt*boldFont:             xft:Source\ Code\ Pro\ Medium:bold:pixelsize=14:antialias=true:hinting=true
+!URxvt*italicFont:           xft:Source\ Code\ Pro\ Medium:italic:pixelsize=14:antialias=true:hinting=true
+!URxvt*boldItalicFont:       xft:Source\ Code\ Pro\ Medium:bold:italic:pixelsize=14:antialias=true:hinting=true
 
 ! UI
 URxvt*fading:               30      ! % brightness reduction on focus loss
