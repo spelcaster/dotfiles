@@ -1,13 +1,13 @@
 ! Settings
-URxvt*termName:             rxvt-unicode-256color
 URxvt*buffered:             true    ! double buffer for xtf
 URxvt*hold:                 false   ! kill window on shell exit
 URxvt*loginShell:           true    ! load shell profiles
 URxvt*print-pipe:           cat > $HOME/tmp/$(echo urxvt.dump.$(date + '%s'))
-URxvt*saveLines:            10000   ! non-tmux window scroll back
-URxvt*geometry:             240x84  ! window size
+URxvt*saveLines:            30000   ! non-tmux window scroll back
+URxvt*geometry:             480x600  ! window size
 URxvt*iso14755:             false
 URxvt*iso14755_52:          false
+URxvt.imLocale:             en_US.utf8
 
 ! Text
 URxvt*colorUL:              yellow
@@ -16,22 +16,17 @@ URxvt*internalBorder:       6       ! pixels from frame edge
 
 ! Fonts -> use fc-list to search the font family name
 ! Terminess
-URxvt*font:                 xft:xos4\ Terminess\ Powerline:pixelsize=14:antialias=true:hinting=true,xft:xos4\ Terminess\ Powerline:pixelsize=14:antialias=true:hinting=true
-URxvt*boldFont:             xft:xos4\ Terminess\ Powerline:bold:pixelsize=14:antialias=true:hinting=true
-URxvt*italicFont:           xft:xos4\ Terminess\ Powerline:italic:pixelsize=14:antialias=true:hinting=true
-URxvt*boldItalicFont:       xft:xos4\ Terminess\ Powerline:bold:italic:pixelsize=14:antialias=true:hinting=true
-
-! Source Code Pro
-!URxvt*font:                 xft:Source\ Code\ Pro\ Medium:pixelsize=14:antialias=true:hinting=true,xft:Source\ Code\ Pro\ Medium:pixelsize=14:antialias=true:hinting=true
-!URxvt*boldFont:             xft:Source\ Code\ Pro\ Medium:bold:pixelsize=14:antialias=true:hinting=true
-!URxvt*italicFont:           xft:Source\ Code\ Pro\ Medium:italic:pixelsize=14:antialias=true:hinting=true
-!URxvt*boldItalicFont:       xft:Source\ Code\ Pro\ Medium:bold:italic:pixelsize=14:antialias=true:hinting=true
+URxvt*font:                 xft:Fantasque Sans Mono-12:antialias=true:hinting=true,xft:FontAwesome-12
+URxvt*boldFont:             xft:Fantasque Sans Mono-12:bold:antialias=true:hinting=true,xft:FontAwesome-12
+URxvt*italicFont:           xft:Fantasque Sans Mono-12:italic:antialias=true:hinting=true,xft:FontAwesome-12
+URxvt*boldItalicFont:       xft:Fantasque Sans Mono-12:bold:italiC:antialias=true:hinting=true,xft:FontAwesome-12
+URxvt*letterSpace:          0
 
 ! UI
-URxvt*fading:               30      ! % brightness reduction on focus loss
+URxvt*fading:               40      ! % brightness reduction on focus loss
 URxvt*mapAlert:             true    ! de-iconify on bell alert
 URxvt*scrollBar:            false   ! maximize usable line width
-URxvt*shading:              40      ! darken background transparency 60%
+URxvt*shading:              60      ! darken background transparency 60%
 URxvt*transparent:          true
 URxvt*visualBell:           false
 
@@ -43,10 +38,10 @@ URxvt*visualBell:           false
 
 ! Keymaps
 
-URxvt.keysym.F1               : \033OP
-URxvt.keysym.F2               : \033OQ
-URxvt.keysym.F3               : \033OR
-URxvt.keysym.F4               : \033OS
+!URxvt.keysym.F1               : \033OP
+!URxvt.keysym.F2               : \033OQ
+!URxvt.keysym.F3               : \033OR
+!URxvt.keysym.F4               : \033OS
 
 ! emulate XTerm for proper recognition of key combinations in Vim
 !URxvt.keysym.Up              : \033[A  !breaks arrow keys in Vim
