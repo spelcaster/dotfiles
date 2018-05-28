@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #########################################################################
-# Copyright (C) 2012-2014  Wojciech Siewierski                          #
+# Copyright (C) 2012-2017  Wojciech Siewierski                          #
 #                                                                       #
 # This program is free software: you can redistribute it and/or modify  #
 # it under the terms of the GNU General Public License as published by  #
@@ -105,9 +105,9 @@ sub on_user_command {
         } elsif ($cmd eq 'surround-complete') {
             # Completing contents of quotes and braces.
 
-            # Here we are using three named groups: s, b, r for quotes, braces
+            # Here we are using three named groups: s, b, p for quotes, braces
             # and parenthesis.
-            $char_class_before      = '((?<q>["\'])|(?<b>\[)|(?<p>\())';
+            $char_class_before      = '((?<q>["\'`])|(?<b>\[)|(?<p>\())';
 
             $matcher                = generate_matcher('.*?');
 
@@ -233,7 +233,6 @@ sub highlight_match {
                       $self->{highlight} = [$beg_row, $beg_col, $end_row, $end_col];
                       $self->scr_xor_span(@{$self->{highlight}}, urxvt::RS_RVid);
                       $self->{pty_ev_events} = $self->pty_ev_events(urxvt::EV_NONE);
-                      $self->enable(refresh_begin => \&clear_highlight);
                   },
                   key_press => \&conditional_leave);
 }
@@ -302,7 +301,7 @@ sub generate_matcher {
 # completion.
 #
 # Takes all the arguments that find_match() would take, to make a
-# mutualy recursive call.
+# mutually recursive call.
 sub skip_duplicates {
     my $self = $_[0];
     my $completion = shift @{$self->{matches_in_row}}; # get the rightmost one
