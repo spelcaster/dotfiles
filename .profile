@@ -7,11 +7,11 @@ alias vimj="vim $(date +'%Y%m%d').md"
 alias poweroff='sh ~/bin/see_you_space_cowboy.sh; sleep 1; poweroff'
 alias reboot='sh ~/bin/see_you_space_cowboy.sh; sleep 1; reboot'
 
-export PATH=$PATH:$HOME/bin:$HOME/.composer/vendor/bin
+export PATH=$PATH:$HOME/bin:$HOME/.composer/vendor/bin:$HOME/.yarn/bin
 export NODE_PATH=/usr/lib/node_modules:$NODE_PATH
 
-export NVM_DIR="$HOME/.nvm"
-# This loads nvm
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-# This loads nvm bash_completion
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+if [[ $DISPLAY ]]; then
+    # If not running interactively, do not do anything
+    [[ $- != *i* ]] && return
+    [[ -z "$TMUX" ]] && exec tmux
+fi
