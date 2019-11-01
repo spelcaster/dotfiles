@@ -1,3 +1,7 @@
+! Extensions
+! URxvt.perl-lib                : ~/.urxvt/ext
+URxvt.perl-ext-common         : default,resize-font,tabbedex,clipboard,url-select,keyboard-select,autocomplete-ALL-the-things
+
 ! Settings
 URxvt*buffered:             true    ! double buffer for xtf
 URxvt*hold:                 false   ! kill window on shell exit
@@ -16,10 +20,10 @@ URxvt*internalBorder:       6       ! pixels from frame edge
 
 ! Fonts -> use fc-list to search the font family name
 ! Terminess
-URxvt*font:                 xft:Fantasque Sans Mono-12:antialias=true:hinting=true,xft:FontAwesome-12
-URxvt*boldFont:             xft:Fantasque Sans Mono-12:bold:antialias=true:hinting=true,xft:FontAwesome-12
-URxvt*italicFont:           xft:Fantasque Sans Mono-12:italic:antialias=true:hinting=true,xft:FontAwesome-12
-URxvt*boldItalicFont:       xft:Fantasque Sans Mono-12:bold:italiC:antialias=true:hinting=true,xft:FontAwesome-12
+URxvt*font:                 xft:Fantasque Sans Mono:pixelsize=12:antialias=true:hinting=true,xft:FontAwesome:pixelsize=12
+URxvt*boldFont:             xft:Fantasque Sans Mono:pixelsize=12:bold:antialias=true:hinting=true,xft:FontAwesome:pixelsize=12
+URxvt*italicFont:           xft:Fantasque Sans Mono:pixelsize=12:italic:antialias=true:hinting=true,xft:FontAwesome:pixelsize=12
+URxvt*boldItalicFont:       xft:Fantasque Sans Mono:pixelsize=12:bold:italiC:antialias=true:hinting=true,xft:FontAwesome:pixelsize=12
 URxvt*letterSpace:          0
 
 ! UI
@@ -108,10 +112,6 @@ URxvt.keysym.M-C-S-Left       : \033[1;8D
 !URxvt.keysym.M-C-S-Page_Down : seen as Rxvt.keysym.S-Page_Down
 URxvt.keysym.M-C-S-Home       : \033[1;8H
 URxvt.keysym.M-C-S-End        : \033[1;8F
-
-! Extensions
-URxvt.perl-lib                : .urxvt
-URxvt.perl-ext-common         : default,tabbedex,clipboard,url-select,keyboard-select,autocomplete-ALL-the-things
 
 ! autocomplete-ALL-the-things
 URxvt.keysym.M-C-slash        : perl:aAtt:word-complete
