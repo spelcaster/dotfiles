@@ -1,5 +1,0 @@
-#include ".Xresources.d/global"
-#include ".Xresources.d/urxvt"
-#include ".Xresources.d/gruvbox-dark"
-#include ".Xresources.d/gruvbox-rxvt256"
-#include ".Xresources.d/xft"
