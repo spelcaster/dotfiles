@@ -2,7 +2,7 @@
 	email = username@example.com
 	name = Username
 [core]
-	editor = vim
+	editor = nvim
 [color]
 	diff = auto
 	status = auto
