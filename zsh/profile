@@ -1,0 +1,19 @@
+alias ls='ls --color=auto'
+alias tailf='tail -f'
+alias gcj="git commit -m \"annotations from $(date +'%Y-%m-%d %H:%M')\""
+alias vj="vim $(date +'%Y%m%d').md"
+alias poweroff='sh ~/bin/see_you_space_cowboy.sh; sleep 1; poweroff'
+alias reboot='sh ~/bin/see_you_space_cowboy.sh; sleep 1; reboot'
+
+export KUBE_EDITOR=nvim
+export PATH="$HOME/.local/bin:/var/lib/snapd/snap/bin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+if [[ $DISPLAY ]]; then
+    # If not running interactively, do not do anything
+    [[ $- != *i* ]] && return
+    [[ -z "$TMUX" ]] && exec tmux
+fi
