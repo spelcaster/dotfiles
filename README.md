@@ -27,3 +27,11 @@ ln -sf ~/.config/tmux/tmux.conf ~/.tmux.conf
 - [tpm](https://github.com/tmux-plugins/tpm)
 - [zsh-autosuggestions](https://archlinux.org/packages/extra/any/zsh-autosuggestions/)
 - [zsh-syntax-highlighting](https://archlinux.org/packages/extra/any/zsh-syntax-highlighting/)
+
+# Inspirations
+
+This project was inspired by ideas, patterns, and approaches from other open-source repositories and community work.
+
+Special thanks to:
+
+- [omerxx/dotfiles](https://github.com/omerxx/dotfiles) follow the author on his YouTube Channel [DevOps Toolbox](https://www.youtube.com/@devopstoolbox);
