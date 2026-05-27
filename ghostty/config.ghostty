@@ -1,0 +1,54 @@
+# Target: Ghostty config. Place as ~/.config/ghostty/config.ghostty
+
+# Window size
+window-width = 120
+window-height = 28
+
+# Font
+# Repeated font-family entries act as fallbacks.
+font-family = "IBM Plex Mono"
+font-family = "IBM Plex Mono Nerd Font"
+font-family = "Symbols Nerd Font Mono"
+font-size = 12
+font-feature = calt, liga
+
+# Theme
+# Check the exact installed name with: ghostty +list-themes | grep -i gruvbox
+# If this exact theme name does not exist, replace it with the closest built-in Gruvbox theme.
+theme = "Gruvbox Dark"
+
+# Tabs
+window-show-tab-bar = always
+tab-inherit-working-directory = true
+split-inherit-working-directory = true
+
+# Scrollback
+scrollback-limit = 1000000
+scrollbar = system
+
+# Close confirmation
+confirm-close-surface = true
+
+# Keybindings
+keybind = ctrl+shift+t=new_tab
+keybind = ctrl+shift+w=close_tab
+
+keybind = ctrl+tab=next_tab
+keybind = ctrl+shift+tab=previous_tab
+
+# Splits
+keybind = ctrl+shift+apostrophe=new_split:right
+keybind = ctrl+shift+5=new_split:down
+
+# Split navigation
+keybind = alt+left=goto_split:left
+keybind = alt+right=goto_split:right
+keybind = alt+up=goto_split:up
+keybind = alt+down=goto_split:down
+
+# Scrollback
+keybind = shift+page_up=scroll_page_up
+keybind = shift+page_down=scroll_page_down
+
+# Sends: ESC [ 13 ; 2 u
+keybind = shift+enter=text:\x1b[13;2u
