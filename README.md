@@ -10,6 +10,7 @@ My personal dotfiles
 cp starship ~/.config
 cp tmux ~/.config
 cp zsh ~/.config
+cp ghostty ~/.config
 
 # create links
 ln -sf ~/.config/zshrc ~/.zshrc
