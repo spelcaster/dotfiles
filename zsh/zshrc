@@ -1,4 +1,9 @@
 # Path to your oh-my-zsh installation.
+
+is_linux_tty() {
+  [[ "$TERM" == "linux" ]]
+}
+
 # Reevaluate the prompt string each time it's displaying a prompt
 setopt prompt_subst
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
@@ -29,8 +34,22 @@ bindkey '^e' end-of-line
 bindkey '^[[1;5D' backward-word
 bindkey '^[[1;5C' forward-word
 
+
+if is_linux_tty; then
+  # Keep TTY simple.
+  export STARSHIP_CONFIG="$HOME/.config/starship/tty.toml"
+
+  # Optional: disable some visual plugins/features.
+  export NO_COLOR=1
+
+  # Simple prompt fallback if you prefer not to use Starship on TTY.
+  # PROMPT='%n@%m:%~%# '
+else
+  # Modern terminal emulator path.
+  export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+fi
+
 eval "$(starship init zsh)"
-export STARSHIP_CONFIG=~/.config/starship/starship.toml
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
