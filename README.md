@@ -1,6 +1,7 @@
 # dotfiles
 
 My personal dotfiles
+![Terminal (zsh/starship/tmux)](resources/terminal.png)
 
 # How to install
 
