@@ -4,6 +4,17 @@
 window-width = 120
 window-height = 28
 
+background = #1d2021
+background-opacity = 1.0
+
+background-image = ~/.config/ghostty/resources/img/ttybg.png
+background-image-opacity = 0.03
+background-image-fit = cover
+background-image-position = center
+background-image-repeat = false
+
+background-opacity-cells = true
+
 # Font
 # Repeated font-family entries act as fallbacks.
 font-family = "IBM Plex Mono"
