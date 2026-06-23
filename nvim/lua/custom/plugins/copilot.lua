@@ -1,0 +1,20 @@
+
+-- local gh = function(repo)
+--   return 'https://github.com/' .. repo
+-- end
+-- 
+-- vim.pack.add({
+--   { src = gh('olimorris/codecompanion.nvim'), version = 'v17.33.0' },
+--   gh('github/copilot.vim'),
+-- }, { load = true })
+-- 
+-- -- codecompanion.nvim
+-- require('codecompanion').setup({
+--   strategies = {
+--     chat = { adapter = 'copilot' },
+--     inline = { adapter = 'copilot' },
+--     agent = { adapter = 'copilot' },
+--   },
+-- })
+-- 
+-- vim.g.copilot_enabled = false

@@ -4,6 +4,7 @@
 --   ~/.config/nvim/lua/custom/plugins.lua
 -- and call:
 --   require('custom.plugins')
+--
 
 local gh = function(repo)
   return 'https://github.com/' .. repo
@@ -20,12 +21,11 @@ vim.pack.add({
   gh('tpope/vim-surround'),
   { src = gh('mg979/vim-visual-multi'), version = 'master' },
   gh('ellisonleao/gruvbox.nvim'),
-  gh('github/copilot.vim'),
   gh('nvim-lua/plenary.nvim'),
   gh('nvim-treesitter/nvim-treesitter'),
-  { src = gh('olimorris/codecompanion.nvim'), version = 'v17.33.0' },
   gh('numToStr/Comment.nvim'),
   gh('NvChad/nvim-colorizer.lua'),
+  gh('echasnovski/mini.pairs'),
 }, { load = true })
 
 -- Plugins loaded manually/lazily.
@@ -37,17 +37,8 @@ vim.pack.add({
 -- Theme
 vim.cmd.colorscheme('gruvbox')
 
--- codecompanion.nvim
-require('codecompanion').setup({
-  strategies = {
-    chat = { adapter = 'copilot' },
-    inline = { adapter = 'copilot' },
-    agent = { adapter = 'copilot' },
-  },
-})
-
 -- Comment.nvim
-require('Comment').setup({})
+require('Comment').setup()
 
 -- nvim-colorizer.lua
 require('colorizer').setup({
@@ -113,81 +104,4 @@ vim.api.nvim_create_autocmd('UIEnter', {
   end,
 })
 
--- Then configure extra servers here
-vim.lsp.config('vtsls', {
-  cmd = { 'vtsls', '--stdio' },
-  filetypes = {
-    'javascript',
-    'javascriptreact',
-    'javascript.jsx',
-    'typescript',
-    'typescriptreact',
-    'typescript.tsx',
-  },
-  root_markers = {
-    'tsconfig.json',
-    'jsconfig.json',
-    'package.json',
-    '.git',
-  },
-})
-
-vim.lsp.config('intelephense', {
-  cmd = { 'intelephense', '--stdio' },
-  filetypes = { 'php' },
-  root_markers = {
-    'composer.json',
-    '.git',
-  },
-})
-
-vim.lsp.config('clangd', {
-  cmd = {
-    'clangd',
-    '--background-index',
-    '--clang-tidy',
-    '--completion-style=detailed',
-    '--header-insertion=iwyu',
-  },
-  filetypes = {
-    'c',
-    'cpp',
-    'objc',
-    'objcpp',
-    'cuda',
-  },
-  root_markers = {
-    'compile_commands.json',
-    'compile_flags.txt',
-    'configure.ac',
-    '.git',
-  },
-})
-
-vim.lsp.config('pyright', {
-  cmd = { 'pyright-langserver', '--stdio' },
-  filetypes = { 'python' },
-  root_markers = {
-    'pyproject.toml',
-    'setup.py',
-    'setup.cfg',
-    'requirements.txt',
-    'Pipfile',
-    'pyrightconfig.json',
-    '.git',
-  },
-  settings = {
-    python = {
-      analysis = {
-        autoSearchPaths = true,
-        useLibraryCodeForTypes = true,
-        diagnosticMode = 'workspace',
-      },
-    },
-  },
-})
-
-vim.lsp.enable('pyright')
-vim.lsp.enable('clangd')
-vim.lsp.enable('intelephense')
-vim.lsp.enable('vtsls')
+require('mini.pairs').setup()
