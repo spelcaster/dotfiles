@@ -104,4 +104,6 @@ vim.api.nvim_create_autocmd('UIEnter', {
   end,
 })
 
+vim.keymap.set('x', '//', 'gcgv', { remap = true, desc = 'Toggle comment and keep selection' })
+
 require('mini.pairs').setup()
