@@ -1,7 +1,6 @@
 vim.pack.add({
   { src = 'https://github.com/mfussenegger/nvim-jdtls' },
   { src = 'https://github.com/ray-x/lsp_signature.nvim' },
-  { src = 'https://github.com/ray-x/lsp_signature.nvim' },
   { src = 'https://github.com/stevearc/aerial.nvim' },
 })
 
