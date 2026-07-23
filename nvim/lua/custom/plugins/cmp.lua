@@ -1,57 +1,48 @@
-vim.pack.add({
-  { src = 'https://github.com/hrsh7th/nvim-cmp' },
-  { src = 'https://github.com/hrsh7th/cmp-nvim-lsp' },
-  { src = 'https://github.com/hrsh7th/cmp-buffer' },
-  { src = 'https://github.com/hrsh7th/cmp-path' },
+local ok, blink = pcall(require, 'blink.cmp')
 
-  { src = 'https://github.com/rafamadriz/friendly-snippets' },
-  { src = 'https://github.com/saadparwaiz1/cmp_luasnip' },
+require('luasnip').setup({
+  enable_autosnippets = true,
 })
 
-local cmp = require('cmp')
-local luasnip = require('luasnip')
+vim.pack.add({
+  { src = 'https://github.com/rafamadriz/friendly-snippets' },
+})
 
-require('luasnip.loaders.from_vscode').lazy_load()
+pcall(function()
+  require('luasnip.loaders.from_vscode').lazy_load()
+end)
 
-cmp.setup({
-  snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
+-- Extend/override blink options after Kickstart loads.
+blink.setup({
+  snippets = {
+    preset = 'luasnip',
+  },
+  sources = {
+    -- Global default.
+    default = { 'lsp', 'path', 'snippets', 'buffer' },
+
+    -- Java-specific: remove buffer completion so JDTLS owns class completions/imports.
+    per_filetype = {
+      java = { 'lsp', 'path', 'snippets' },
+    },
   },
 
-  mapping = cmp.mapping.preset.insert({
-    ['<C-Space>'] = cmp.mapping.complete(),
+  keymap = {
+    preset = 'default',
 
-    ['<CR>'] = cmp.mapping.confirm({
-      select = true,
-    }),
+    ['<Tab>'] = {
+      'select_and_accept',
+      'fallback',
+    },
 
-    ['<C-j>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
+    ['<S-Tab>'] = {
+      'select_prev',
+      'fallback',
+    },
 
-    ['<C-k>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-  }),
-
-  sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'luasnip' },
-    { name = 'path' },
-    { name = 'buffer' },
-  }),
+    ['<CR>'] = { 'accept', 'fallback' },
+    ['<C-Space>'] = { 'show', 'show_documentation', 'hide_documentation' },
+    ['<C-j>'] = { 'select_next', 'snippet_forward', 'fallback' },
+    ['<C-k>'] = { 'select_prev', 'snippet_backward', 'fallback' },
+  },
 })

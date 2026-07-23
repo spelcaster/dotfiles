@@ -4,6 +4,10 @@ vim.pack.add({
   { src = 'https://github.com/stevearc/aerial.nvim' },
 })
 
+vim.lsp.config('*', { 
+  capabilities = require("blink.cmp").get_lsp_capabilities() 
+})
+
 -- Then configure extra servers here
 vim.lsp.config('vtsls', {
   cmd = { 'vtsls', '--stdio' },
