@@ -1,3 +1,9 @@
+vim.opt.expandtab = true      -- use spaces instead of tabs
+vim.opt.tabstop = 4           -- visual width of a tab character
+vim.opt.shiftwidth = 4        -- indentation width for >>, <<, autoindent
+vim.opt.softtabstop = 4       -- spaces inserted/deleted with Tab/Backspace
+vim.opt.smartindent = true
+
 vim.pack.add({
   { src = "https://github.com/lukas-reineke/indent-blankline.nvim" },
 })
