@@ -14,6 +14,10 @@ local packadd = function(name)
   vim.cmd.packadd(name)
 end
 
+-- Line numbers
+vim.opt.number = true         -- show absolute number on current line
+vim.opt.relativenumber = true -- show relative numbers around cursor
+
 -- Plugins that should be available immediately.
 vim.pack.add({
   gh('tpope/vim-sleuth'),
