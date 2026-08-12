@@ -68,7 +68,10 @@ local config = {
           'com',
           'org',
         }
-      }
+      },
+      signatureHelp = {
+        enabled = true,
+      },
     },
   },
 

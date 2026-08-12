@@ -1,5 +1,4 @@
 vim.pack.add({
-  { src = 'https://github.com/ray-x/lsp_signature.nvim' },
   { src = 'https://github.com/stevearc/aerial.nvim' },
 })
 
@@ -82,15 +81,6 @@ vim.lsp.config('basedpyright', {
   },
 })
 
-require('lsp_signature').setup({
-  bind = true,
-  hint_enable = false,
-  floating_window = true,
-  handler_opts = {
-    border = 'rounded',
-  },
-})
-
 require('aerial').setup({
   backends = { 'lsp', 'treesitter', 'markdown', 'man' },
 
@@ -115,10 +105,6 @@ require('aerial').setup({
     'Constant',
   },
 })
-
-vim.keymap.set({ 'n' }, '<C-k>', function() require('lsp_signature').toggle_float_win() end, { silent = true, noremap = true, desc = 'toggle signature' })
-
-vim.keymap.set({ 'n' }, '<Leader>k', function() vim.lsp.buf.signature_help() end, { silent = true, noremap = true, desc = 'toggle signature' })
 
 vim.keymap.set('n', '<F4>', '<cmd>AerialToggle!<CR>', { desc = 'Toggle code outline', })
 
