@@ -91,5 +91,5 @@ vim.keymap.set('n', '<leader>jv', function()
 end, { buffer = true, desc = 'Java extract variable' })
 
 vim.keymap.set('v', '<leader>jm', function()
-  require('jdtls').extract_method(true)
+  require('jdtls').extract_method()
 end, { buffer = true, desc = 'Java extract method' })
