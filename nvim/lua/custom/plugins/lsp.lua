@@ -1,11 +1,10 @@
 vim.pack.add({
-  { src = 'https://github.com/mfussenegger/nvim-jdtls' },
   { src = 'https://github.com/ray-x/lsp_signature.nvim' },
   { src = 'https://github.com/stevearc/aerial.nvim' },
 })
 
-vim.lsp.config('*', { 
-  capabilities = require("blink.cmp").get_lsp_capabilities() 
+vim.lsp.config('*', {
+  capabilities = require("blink.cmp").get_lsp_capabilities()
 })
 
 -- Then configure extra servers here
@@ -116,7 +115,6 @@ require('aerial').setup({
     'Constant',
   },
 })
-
 
 vim.keymap.set({ 'n' }, '<C-k>', function() require('lsp_signature').toggle_float_win() end, { silent = true, noremap = true, desc = 'toggle signature' })
 
