@@ -1,9 +1,11 @@
-vim.pack.add({
-  { src = 'https://github.com/stevearc/aerial.nvim' },
-})
+local ok, blink = pcall(require, 'blink.cmp')
 
 vim.lsp.config('*', {
-  capabilities = require("blink.cmp").get_lsp_capabilities()
+  capabilities = blink.get_lsp_capabilities()
+})
+
+vim.pack.add({
+  { src = 'https://github.com/stevearc/aerial.nvim' },
 })
 
 -- Then configure extra servers here
