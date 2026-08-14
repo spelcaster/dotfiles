@@ -1,1 +1,1 @@
-require("custom.plugins.lsp.java")
+require("custom.plugins.lsp.java").setup()
