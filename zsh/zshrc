@@ -92,6 +92,7 @@ alias ......="cd ../../../../.."
 
 # VIM
 alias v="/usr/bin/nvim"
+alias vfzf='nvim "$(fzf)"'
 
 # Nmap
 alias nm="nmap -sC -sV -oN nmap"
