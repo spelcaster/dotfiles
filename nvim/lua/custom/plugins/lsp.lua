@@ -4,10 +4,6 @@ vim.lsp.config('*', {
   capabilities = blink.get_lsp_capabilities()
 })
 
-vim.pack.add({
-  { src = 'https://github.com/stevearc/aerial.nvim' },
-})
-
 -- Then configure extra servers here
 vim.lsp.config('vtsls', {
   cmd = { 'vtsls', '--stdio' },
@@ -82,33 +78,6 @@ vim.lsp.config('basedpyright', {
     },
   },
 })
-
-require('aerial').setup({
-  backends = { 'lsp', 'treesitter', 'markdown', 'man' },
-
-  layout = {
-    default_direction = 'left',
-    width = 40,
-  },
-
-  filter_kind = {
-    'Class',
-    'Constructor',
-    'Enum',
-    'Function',
-    'Interface',
-    'Method',
-    'Module',
-    'Namespace',
-    'Package',
-    'Property',
-    'Struct',
-    'Field',
-    'Constant',
-  },
-})
-
-vim.keymap.set('n', '<F4>', '<cmd>AerialToggle!<CR>', { desc = 'Toggle code outline', })
 
 vim.lsp.enable('basedpyright')
 vim.lsp.enable('clangd')
