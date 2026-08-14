@@ -1,7 +1,7 @@
 # Neovim
 
 My personal Neovim configuration. It is built **on top of [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim)**:
-kickstart provides the base (`init.lua`, sane defaults, core LSP/treesitter/telescope setup), and the files in this
+kickstart provides the base (`init.lua`, sane defaults, core LSP/treesitter/telescope/blink.cmp setup), and the files in this
 directory live under `lua/custom/` and `ftplugin/` to layer my own plugins, language servers and keymaps on top of it.
 
 Plugins are installed with Neovim's native `vim.pack` (no `lazy.nvim`/`packer` required).
@@ -10,17 +10,23 @@ Plugins are installed with Neovim's native `vim.pack` (no `lazy.nvim`/`packer` r
 
 | Path | Purpose |
 | --- | --- |
-| `lua/custom/plugins/plugins.lua` | General editing plugins (theme, git, motions, treesitter, comments, colorizer). |
-| `lua/custom/plugins/cmp.lua` | Completion engine (`nvim-cmp`) and snippet sources. |
-| `lua/custom/plugins/lsp.lua` | Language servers, signature help and code outline. |
+| `lua/custom/plugins/init.lua` | Entry point. Requires every module below **in a fixed order** (order matters, see comments in the file). |
+| `lua/custom/plugins/plugins.lua` | General editing plugins (theme, git, motions, treesitter, comments, colorizer, line numbers). |
+| `lua/custom/plugins/telescope.lua` | Telescope file-browser extension plus custom find-files keymaps. |
+| `lua/custom/plugins/aerial.lua` | Symbol outline window (`aerial.nvim`). |
+| `lua/custom/plugins/cmp.lua` | Snippet engine config (LuaSnip) and the `friendly-snippets` collection. |
+| `lua/custom/plugins/lsp.lua` | Extra language servers (TS/JS, PHP, C/C++, Python) and generic LSP code-action keymaps. |
+| `lua/custom/plugins/lsp/java.lua` | `nvim-jdtls` install + `JavaLSP.setup()`, the Java LSP bootstrap used by `ftplugin/java.lua`. |
 | `lua/custom/plugins/debugger.lua` | Debug Adapter Protocol (DAP) stack. |
-| `lua/custom/plugins/indent.lua` | Indentation guides and indent/unindent keymaps. |
+| `lua/custom/plugins/indent.lua` | Indentation options, indent guides and indent/unindent keymaps. |
 | `lua/custom/plugins/copilot.lua` | GitHub Copilot / CodeCompanion (currently commented out / disabled). |
-| `ftplugin/java.lua` | Per-buffer Java (`jdtls`) setup, loaded only for Java files. |
+| `ftplugin/java.lua` | Calls `require('custom.plugins.lsp.java').setup()`, loaded only for Java files. |
 
 ## Plugins
 
 ### Editing & UI (`plugins.lua`)
+
+Also sets `number`/`relativenumber` for line numbers.
 
 | Plugin | What | Why | When |
 | --- | --- | --- | --- |
@@ -37,24 +43,37 @@ Plugins are installed with Neovim's native `vim.pack` (no `lazy.nvim`/`packer` r
 | [emmet-vim](https://github.com/mattn/emmet-vim) | Emmet HTML/CSS abbreviations. | Expand markup quickly. | Lazy-loaded for `html`, `css`, `javascriptreact`, `typescriptreact`, `php`, `blade`. |
 | [argonaut.nvim](https://git.sr.ht/~foosoft/argonaut.nvim) | Split/join function arguments. | Reflow argument lists and provide `a`rgument text objects. | Lazy-loaded on `VeryLazy`. |
 
+### Telescope extension (`telescope.lua`)
+
+| Plugin | What | Why | When |
+| --- | --- | --- | --- |
+| [telescope-file-browser.nvim](https://github.com/nvim-telescope/telescope-file-browser.nvim) | File browser extension for Telescope, hijacks `netrw`. | Create/rename/delete files and browse the tree without leaving Telescope. | `<leader>nf`. |
+
+This file also rebinds two core `find_files` pickers (see keymaps below) on top of the base kickstart Telescope setup.
+
+### Code outline (`aerial.lua`)
+
+| Plugin | What | Why | When |
+| --- | --- | --- | --- |
+| [aerial.nvim](https://github.com/stevearc/aerial.nvim) | Symbol outline window (LSP/treesitter/markdown/man backends). | Navigate classes/methods/functions in the current file. | `<F4>`. |
+
 ### Completion & snippets (`cmp.lua`)
 
-| Plugin | What | Why |
-| --- | --- | --- |
-| [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) | Completion engine. | Drives the popup completion menu. |
-| [cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp) | LSP source. | Completions from language servers. |
-| [cmp-buffer](https://github.com/hrsh7th/cmp-buffer) | Buffer source. | Complete words from open buffers. |
-| [cmp-path](https://github.com/hrsh7th/cmp-path) | Path source. | Complete filesystem paths. |
-| [cmp_luasnip](https://github.com/saadparwaiz1/cmp_luasnip) | Snippet source. | Feed LuaSnip snippets into cmp. |
-| [friendly-snippets](https://github.com/rafamadriz/friendly-snippets) | Snippet collection. | Ready-made snippets for many languages. |
+Completion itself (`blink.cmp`) comes from the kickstart base; this file only configures the snippet engine on top of it.
 
-### Language servers (`lsp.lua`)
+| Plugin | What | Why | When |
+| --- | --- | --- | --- |
+| LuaSnip | Snippet engine. | Configured here with `enable_autosnippets = true`. | Always (provided by kickstart base). |
+| [friendly-snippets](https://github.com/rafamadriz/friendly-snippets) | Snippet collection. | Ready-made snippets for many languages, loaded via LuaSnip's VS Code loader. | Always. |
+
+### Language servers (`lsp.lua` + `lsp/java.lua`)
+
+`lsp.lua` doesn't install a plugin itself — it configures four extra servers on top of kickstart's built-in LSP client and
+wires generic code-action keymaps. `lsp/java.lua` installs `nvim-jdtls` and exposes `JavaLSP.setup()`.
 
 | Plugin / Server | What | Why |
 | --- | --- | --- |
-| [nvim-jdtls](https://github.com/mfussenegger/nvim-jdtls) | Java language server bridge. | Rich Java tooling via `jdtls`. |
-| [lsp_signature.nvim](https://github.com/ray-x/lsp_signature.nvim) | Function signature hints. | Show parameter help while typing. |
-| [aerial.nvim](https://github.com/stevearc/aerial.nvim) | Symbol outline window. | Navigate classes/methods in a file. |
+| [nvim-jdtls](https://github.com/mfussenegger/nvim-jdtls) | Java language server bridge. | Rich Java tooling via `jdtls` (started from `ftplugin/java.lua`). |
 | `vtsls` | TypeScript/JavaScript server. | JS/TS diagnostics and completion. |
 | `intelephense` | PHP server. | PHP diagnostics and completion. |
 | `clangd` | C/C++ server. | C/C++/CUDA diagnostics and completion. |
@@ -71,7 +90,11 @@ Plugins are installed with Neovim's native `vim.pack` (no `lazy.nvim`/`packer` r
 | [nvim-dap-virtual-text](https://github.com/theHamsta/nvim-dap-virtual-text) | Inline variable values. | See values next to code while debugging. |
 | [nvim-nio](https://github.com/nvim-neotest/nvim-nio) | Async IO library. | Dependency for `nvim-dap-ui`. |
 
+> No keymaps or adapter configuration are wired up in this file yet — the plugins are installed but not yet set up.
+
 ### Indentation (`indent.lua`)
+
+Also sets indentation options: `expandtab`, `tabstop=4`, `shiftwidth=4`, `softtabstop=4`, `smartindent`.
 
 | Plugin | What | Why |
 | --- | --- | --- |
@@ -97,22 +120,26 @@ Leader key is `<Space>` (kickstart default).
 | Normal / Visual / Operator | `<leader>n` | Select inner argument. |
 | Normal / Visual / Operator | `<leader>p` | Select outer argument. |
 
-### Completion — `cmp.lua`
+### Telescope — `telescope.lua`
 
 | Mode | Shortcut | Action |
 | --- | --- | --- |
-| Insert | `<C-Space>` | Trigger completion. |
-| Insert | `<CR>` | Confirm the selected item. |
-| Insert / Select | `<C-j>` | Next item, or expand/jump snippet. |
-| Insert / Select | `<C-k>` | Previous item, or jump snippet backwards. |
+| Normal | `<leader>nf` | Open the file browser (Telescope file-browser) rooted at the cwd. |
+| Normal | `<C-p>` | Find files. |
+| Normal | `<leader>sf` | Find files starting from the current buffer's directory. |
+
+### Code outline — `aerial.lua`
+
+| Mode | Shortcut | Action |
+| --- | --- | --- |
+| Normal | `<F4>` | Toggle the Aerial code outline. |
 
 ### LSP — `lsp.lua`
 
 | Mode | Shortcut | Action |
 | --- | --- | --- |
-| Normal | `<C-k>` | Toggle the floating signature window. |
-| Normal | `<leader>k` | Show signature help. |
-| Normal | `<F4>` | Toggle the Aerial code outline. |
+| Normal | `<leader>lca` | Trigger a code action. |
+| Normal | `<leader>lum` | Run the code action whose title contains "unimplemented methods". |
 
 ### Indentation — `indent.lua`
 
@@ -123,18 +150,23 @@ Leader key is `<Space>` (kickstart default).
 | Visual | `<Tab>` | Indent the selection (keeps selection). |
 | Visual | `<S-Tab>` | Unindent the selection (keeps selection). |
 
-### Java — `ftplugin/java.lua` (buffer-local, Java files only)
+### Java — `lsp/java.lua` via `ftplugin/java.lua` (Java files only)
 
 | Mode | Shortcut | Action |
 | --- | --- | --- |
 | Normal | `<leader>jo` | Organize imports. |
 | Normal | `<leader>jv` | Extract variable. |
-| Visual | `<leader>jm` | Extract method. |
+| Visual | `<leader>jx` | Extract method. |
+| Normal | `<leader>jm` | Move the current file to another package (prompts for destination). |
+| Normal | `<leader>lum` | Run the "override" code action to add unimplemented methods (overrides the generic `lsp.lua` binding above for Java buffers). |
+
+> `<leader>jo`, `<leader>jv` and `<leader>jx` are set with `buffer = true` (strictly buffer-local); `<leader>lum` is re-bound
+> globally each time a Java file's LSP starts.
 
 ## kickstart.nvim
 
 This configuration assumes the **latest version of [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim)** as
 its base. Staying on the most recent kickstart is **encouraged**: it tracks current Neovim APIs (e.g. the modern
-`vim.lsp.config`/`vim.lsp.enable` used here), ships security and bug fixes, and keeps the base config aligned with
-upstream defaults so the custom overlay in this directory keeps working. Before adding or changing plugins, update
-kickstart first and re-apply the files from `lua/custom/` and `ftplugin/` on top of it.
+`vim.lsp.config`/`vim.lsp.enable` and `blink.cmp` used here), ships security and bug fixes, and keeps the base config
+aligned with upstream defaults so the custom overlay in this directory keeps working. Before adding or changing plugins,
+update kickstart first and re-apply the files from `lua/custom/` and `ftplugin/` on top of it.
