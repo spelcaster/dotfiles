@@ -15,6 +15,7 @@
 -- Override kickstart.nvim approach because:
 -- 1. I know which scripts I want, and 
 -- 2. the order which script is loaded matters
+require("custom.plugins.telescope")
 require("custom.plugins.indent")
 require("custom.plugins.cmp")
 require("custom.plugins.lsp")
