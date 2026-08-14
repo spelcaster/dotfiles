@@ -79,6 +79,21 @@ vim.lsp.config('basedpyright', {
   },
 })
 
+vim.keymap.set("n", "<leader>lca", vim.lsp.buf.code_action, {
+    desc = "Code Action",
+})
+
+vim.keymap.set("n", "<leader>lum", function()
+  vim.lsp.buf.code_action({
+    filter = function(action)
+      return action.title:lower():find("unimplemented methods", 1, true) ~= nil
+    end,
+    apply = true,
+  })
+end, {
+  desc = "Java: Add unimplemented methods",
+})
+
 vim.lsp.enable('basedpyright')
 vim.lsp.enable('clangd')
 vim.lsp.enable('intelephense')
