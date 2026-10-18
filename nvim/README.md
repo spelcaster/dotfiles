@@ -23,7 +23,10 @@ Plugins are installed with Neovim's native `vim.pack` (no `lazy.nvim`/`packer` r
 | `lua/custom/plugins/copilot.lua` | GitHub Copilot / CodeCompanion (currently commented out / disabled). |
 | `ftplugin/java.lua` | Calls `require('custom.plugins.lsp.java').setup()`, loaded only for Java files. |
 
-## Plugins
+## Plugins currently installed
+
+Everything below is pulled with `vim.pack.add` from `lua/custom/plugins/*.lua`. `copilot.lua` is wired up the same way
+but its `vim.pack.add` call is commented out, so Copilot/CodeCompanion are **not** actually installed right now.
 
 ### Editing & UI (`plugins.lua`)
 
@@ -110,7 +113,8 @@ Also sets indentation options: `expandtab`, `tabstop=4`, `shiftwidth=4`, `softta
 
 ### Disabled (`copilot.lua`)
 
-The Copilot / [CodeCompanion](https://github.com/olimorris/codecompanion.nvim) setup is committed but **commented out**.
+The Copilot / [CodeCompanion](https://github.com/olimorris/codecompanion.nvim) setup is committed but **commented out**,
+including its `vim.pack.add` call — neither plugin is installed while this file stays disabled.
 Uncomment the file to enable AI assistance through Copilot.
 
 ## Keymaps
@@ -123,10 +127,10 @@ Leader key is `<Space>` (kickstart default).
 | --- | --- | --- |
 | Visual | `//` | Toggle comment and keep the selection. |
 | Normal | `<leader>a` | Toggle argument split/join (Argonaut). |
-| Visual / Operator | `ia` | Inner argument text object. |
-| Visual / Operator | `aa` | Outer argument text object. |
-| Normal / Visual / Operator | `<leader>n` | Select inner argument. |
-| Normal / Visual / Operator | `<leader>p` | Select outer argument. |
+| Visual / Operator-pending | `ia` | Inner argument text object. |
+| Visual / Operator-pending | `aa` | Outer argument text object. |
+| Normal / Visual / Operator-pending | `<leader>n` | Select inner argument. |
+| Normal / Visual / Operator-pending | `<leader>p` | Select outer argument. |
 
 ### Telescope — `telescope.lua`
 
@@ -176,6 +180,31 @@ Leader key is `<Space>` (kickstart default).
 
 > `<leader>jo`, `<leader>jv` and `<leader>jx` are set with `buffer = true` (strictly buffer-local); `<leader>lum` is re-bound
 > globally each time a Java file's LSP starts.
+
+### Completion — blink.cmp `'default'` preset (kickstart base, not configured in this directory)
+
+`cmp.lua` in this directory only sets up LuaSnip; the completion engine itself (`blink.cmp`) and its keymap preset come
+from the kickstart base and are listed here for completeness, since they are the active bindings while typing. These
+apply while the completion menu or a snippet is active (insert mode):
+
+| Mode | Shortcut | Action |
+| --- | --- | --- |
+| Insert | `<C-space>` | Show the completion menu; show documentation if the menu is already open. |
+| Insert | `<C-e>` | Cancel the completion (undo the preview), falling back otherwise. |
+| Insert | `<C-y>` | Select the first item (if none selected) and accept it. |
+| Insert | `<Up>` | Select the previous item, falling back otherwise. |
+| Insert | `<Down>` | Select the next item, falling back otherwise. |
+| Insert | `<C-p>` | Select the previous item, falling back to other mappings otherwise. |
+| Insert | `<C-n>` | Select the next item, falling back to other mappings otherwise. |
+| Insert | `<C-b>` | Scroll the documentation window up, falling back otherwise. |
+| Insert | `<C-f>` | Scroll the documentation window down, falling back otherwise. |
+| Insert | `<Tab>` | Jump to the next snippet placeholder, falling back otherwise. |
+| Insert | `<S-Tab>` | Jump to the previous snippet placeholder, falling back otherwise. |
+| Insert | `<C-k>` | Show the signature-help window, hide it if already open, falling back otherwise. |
+
+> "Falling back" means blink.cmp defers to whatever that key would normally do (another plugin's mapping or Neovim's
+> built-in behavior) when the action isn't applicable — e.g. `<Tab>` only jumps a snippet placeholder while one is
+> active; otherwise it falls through.
 
 ## kickstart.nvim
 
