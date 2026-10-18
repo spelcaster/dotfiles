@@ -14,6 +14,7 @@ Plugins are installed with Neovim's native `vim.pack` (no `lazy.nvim`/`packer` r
 | `lua/custom/plugins/plugins.lua` | General editing plugins (theme, git, motions, treesitter, comments, colorizer, line numbers). |
 | `lua/custom/plugins/telescope.lua` | Telescope file-browser extension plus custom find-files keymaps. |
 | `lua/custom/plugins/aerial.lua` | Symbol outline window (`aerial.nvim`). |
+| `lua/custom/plugins/kulala.lua` | REST client for `.http` files (`kulala.nvim`). |
 | `lua/custom/plugins/cmp.lua` | Snippet engine config (LuaSnip) and the `friendly-snippets` collection. |
 | `lua/custom/plugins/lsp.lua` | Extra language servers (TS/JS, PHP, C/C++, Python) and generic LSP code-action keymaps. |
 | `lua/custom/plugins/lsp/java.lua` | `nvim-jdtls` install + `JavaLSP.setup()`, the Java LSP bootstrap used by `ftplugin/java.lua`. |
@@ -57,6 +58,12 @@ This file also rebinds two core `find_files` pickers (see keymaps below) on top 
 | --- | --- | --- | --- |
 | [aerial.nvim](https://github.com/stevearc/aerial.nvim) | Symbol outline window (LSP/treesitter/markdown/man backends). | Navigate classes/methods/functions in the current file. | `<F4>`. |
 
+### REST client (`kulala.lua`)
+
+| Plugin | What | Why | When |
+| --- | --- | --- | --- |
+| [kulala.nvim](https://github.com/mistweaverco/kulala.nvim) | REST client for `.http` request files, with its own tree-sitter parser and LSP. | Write and run HTTP requests from a plain-text file instead of leaving the editor for Postman/Insomnia/curl. | Editing/running `.http` files. Its LSP only attaches to `*.http.js`/`*.http.ts`/`*.http.lua` scripts, so it never interferes with normal JS/TS/Lua LSP. Enables Kulala's own global keymaps under the `<leader>R` prefix (see Keymaps below). |
+
 ### Completion & snippets (`cmp.lua`)
 
 Completion itself (`blink.cmp`) comes from the kickstart base; this file only configures the snippet engine on top of it.
@@ -94,7 +101,8 @@ wires generic code-action keymaps. `lsp/java.lua` installs `nvim-jdtls` and expo
 
 ### Indentation (`indent.lua`)
 
-Also sets indentation options: `expandtab`, `tabstop=4`, `shiftwidth=4`, `softtabstop=4`, `smartindent`.
+Also sets indentation options: `expandtab`, `tabstop=4`, `shiftwidth=4`, `softtabstop=4`, `smartindent`. Also removes the
+`o` flag from `formatoptions` on every filetype, so `o`/`O` never auto-continue a comment leader.
 
 | Plugin | What | Why |
 | --- | --- | --- |
@@ -133,6 +141,12 @@ Leader key is `<Space>` (kickstart default).
 | Mode | Shortcut | Action |
 | --- | --- | --- |
 | Normal | `<F4>` | Toggle the Aerial code outline. |
+
+### REST client — `kulala.lua`
+
+| Mode | Shortcut | Action |
+| --- | --- | --- |
+| Normal | `<leader>R*` | Kulala's own global keymaps (run request, inspect, etc.), enabled with `global_keymaps = true` / `global_keymaps_prefix = '<leader>R'`. The individual bindings under this prefix are defined inside the plugin itself, not in this config. |
 
 ### LSP — `lsp.lua`
 
