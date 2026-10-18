@@ -19,6 +19,19 @@ A short overview of each tool configured here — what it is and why it's part o
 | **neovim** | A modal text editor. | Primary code editor, configured with LSP, completion, and debugging for a lightweight IDE-like experience in the terminal. |
 | **git** | Version control. | Tracks code history; the included `.gitconfig` sets personal defaults and aliases. |
 
+# More documentation
+
+Some tools have their own `README.md` with more detail (layout, plugins, keymaps, etc.):
+
+- [nvim/README.md](nvim/README.md) — Neovim configuration.
+- [zsh/README.md](zsh/README.md) — zsh configuration.
+- [starship/README.md](starship/README.md) — Starship prompt configuration.
+- [tmux/README.md](tmux/README.md) — tmux configuration.
+- [ghostty/README.md](ghostty/README.md) — Ghostty configuration.
+- [atuin/README.md](atuin/README.md) — Atuin configuration.
+- [bin/README.md](bin/README.md) — Personal utility scripts.
+- [resources/README.md](resources/README.md) — Static assets used by this repository's documentation.
+
 # How to install
 
 ```sh
